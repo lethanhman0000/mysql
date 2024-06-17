@@ -3,7 +3,7 @@
 MYSQL_ROOT_PASSWORD="123456"
 
 # Bảo mật cài đặt MySQL
-mysql --user=root --password="$MYSQL_ROOT_PASSWORD" <<-EOF
+mysql --user=root --password="$MYSQL_ROOT_PASSWORD" <<EOF
 -- Đặt mật khẩu cho người dùng root
 ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 
@@ -20,3 +20,9 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 -- Tải lại các bảng quyền hạn
 FLUSH PRIVILEGES;
 EOF
+
+if [ $? -eq 0 ]; then
+    echo "Hoàn thành bảo mật cài đặt MySQL."
+else
+    echo "Có lỗi xảy ra khi bảo mật cài đặt MySQL."
+fi
